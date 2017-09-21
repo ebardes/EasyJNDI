@@ -59,7 +59,7 @@ SOFTWARE.
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:git:git@github.com:ebardes/XMLContext.git</connection>
+		<connection>scm:git:git@github.com:ebardes/EasyJNDI.git</connection>
 	</scm>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
