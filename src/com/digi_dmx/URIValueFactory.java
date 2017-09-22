@@ -23,52 +23,25 @@ SOFTWARE.
 */
 package com.digi_dmx;
 
-import java.io.File;
+import java.net.URI;
+import java.util.Hashtable;
 
-import javax.naming.NamingException;
+import javax.naming.Context;
+import javax.naming.Name;
 import javax.naming.RefAddr;
 import javax.naming.Reference;
-import javax.naming.Referenceable;
-import javax.naming.StringRefAddr;
+import javax.naming.spi.ObjectFactory;
 
-/**
- * A utility class to make file paths Referencable and therefore able to be saved.
- * @author eric
- */
-public class FileLocation implements Referenceable
+class URIValueFactory implements ObjectFactory
 {
-	private final String path;
-
-	/**
-	 * @param path
-	 */
-	public FileLocation(final String path)
-	{
-		this.path = path;
-	}
-
-	/**
-	 * @return The path to the file.
-	 */
-	public final String getPath()
-	{
-		return path;
-	}
-	
-	/**
-	 * @return a {@link java.io.File} object
-	 */
-	public final File getFile()
-	{
-		return new File(path);
-	}
+	public static final String ATTR_NAME = "value";
 	
 	@Override
-	public Reference getReference() throws NamingException
+	public Object getObjectInstance(Object obj, Name name, Context nameCtx, Hashtable<?, ?> environment) throws Exception
 	{
-		RefAddr addr = new StringRefAddr(FileLocationFactory.ATTR_NAME, path);
-		Reference ref = new Reference(FileLocation.class.getCanonicalName(), FileLocationFactory.class.getCanonicalName(), null);
-		ref.add(addr);
-		return ref;
+		Reference ref = (Reference) obj;
+		RefAddr addr = ref.get(ATTR_NAME);
+		return new URIValue(URI.create((String) addr.getContent()));
 	}
+
 }
