@@ -27,47 +27,25 @@ import java.util.Hashtable;
 
 import javax.naming.Context;
 import javax.naming.Name;
-import javax.naming.RefAddr;
 import javax.naming.Reference;
-import javax.naming.StringRefAddr;
 import javax.naming.spi.ObjectFactory;
-import javax.sql.DataSource;
 
-class DataSourceWrapperFactory implements ObjectFactory
+/**
+ * This class contructs the Datasource Adapter
+ * @author eric
+ */
+public class DSFactory implements ObjectFactory
 {
-	public static final int WRAPPER_ITEMS = 3;
-	public static final String TIMEOUT = "$@$@.wrapper.leak.timeout";
-	public static final String WRAPPER_FACTORY = "$@$@.wrapper.factory.name";
-	public static final String WRAPPER_OBJECT = "$@$@.wrapper.object.name";
-
 	@Override
 	public Object getObjectInstance(Object obj, Name name, Context nameCtx, Hashtable<?, ?> environment) throws Exception
 	{
 		Reference ref = (Reference) obj;
-		DataSource wrapped;
-		
-		RefAddr addr;
-		addr = (StringRefAddr) ref.get(WRAPPER_OBJECT);
-		String objClassName = (String) addr.getContent();
-		addr = (StringRefAddr) ref.get(WRAPPER_FACTORY);
-		String factClassName = (String) addr.getContent();
-		addr = (StringRefAddr) ref.get(TIMEOUT);
-		int timeout = Integer.parseInt((String) addr.getContent());
-
-		ObjectFactory innerFactory = (ObjectFactory) Class.forName(factClassName).newInstance();
-		
-		Reference innerRef = new Reference(objClassName, factClassName, null);
-		int n = ref.size() - WRAPPER_ITEMS;
-		
-		for (int i = 0; i < n; i++)
-		{
-			innerRef.add(ref.get(i));
-		}
-		
-		wrapped = (DataSource) innerFactory.getObjectInstance(innerRef, name, nameCtx, environment);
-		
-		DataSourceWrapper wrapper = new DataSourceWrapper(wrapped, timeout);
-		return wrapper;
+		DSAdapter a = new DSAdapter();
+		a.setDriver(ref.get("driver").getContent().toString());
+		a.setUrl(ref.get("url").getContent().toString());
+		a.setUsername(ref.get("username").getContent().toString());
+		a.setPassword(ref.get("password").getContent().toString());
+		a.open();
+		return a;
 	}
-
 }
