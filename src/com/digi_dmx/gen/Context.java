@@ -132,7 +132,7 @@ public class Context
 	}
 
 	/**
-	 * @param attr
+	 * @param attr A single attribute that's added to the array.
 	 */
 	public void addAttr(Attr attr)
 	{

@@ -44,11 +44,11 @@ public class URIValue implements Referenceable
 	private final URI uri;
 	
 	/**
-	 * @param textValue
+	 * @param uri A URI to store
 	 */
-	public URIValue(final URI textValue)
+	public URIValue(final URI uri)
 	{
-		this.uri = textValue;
+		this.uri = uri;
 	}
 	
 	/**
@@ -114,8 +114,8 @@ public class URIValue implements Referenceable
 
 	/**
 	 * @return A URL constructed from this URIValue
-	 * @throws MalformedURLException
-	 * @throws IllegalArgumentException
+	 * @throws MalformedURLException from superclass
+	 * @throws IllegalArgumentException from superclass
 	 * @see java.net.URI#toURL()
 	 */
 	public URL toURL() throws MalformedURLException, IllegalArgumentException

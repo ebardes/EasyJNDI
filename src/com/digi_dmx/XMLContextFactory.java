@@ -30,6 +30,8 @@ import javax.naming.NamingException;
 import javax.naming.spi.InitialContextFactory;
 
 /**
+ * Creates a new Context. Do not directly invoke. Use {@link javax.naming.InitialContext} instead. 
+ * 
  * @author Eric E Bardes
  */
 public class XMLContextFactory implements InitialContextFactory

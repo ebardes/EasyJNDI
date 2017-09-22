@@ -31,14 +31,14 @@ import javax.naming.StringRefAddr;
 
 /**
  * A utility class to make strings Referencable and therefore able to be saved.
- * @author eric
+ * @author Eric E Bardes
  */
 public class StringValue implements Referenceable
 {
 	private final String textValue;
 	
 	/**
-	 * @param textValue
+	 * @param textValue Something to be stored
 	 */
 	public StringValue(final String textValue)
 	{

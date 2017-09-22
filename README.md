@@ -6,7 +6,8 @@ The purpose of this project is to create a JNDI framework that uses easy to edit
 
 ### Environment ###
 
-Java 7 or higher. Optional dependency on Apache Common DBCP2.
+* Java 7 or higher. 
+* [Apache Common DBCP](https://commons.apache.org/proper/commons-dbcp/). *Optional if you don't use the DSAdapter*.
 
 JNDI uses two system properties to define the JNDI framework and where to locate resources.
 Normally there's a property file called `jndi.properties` included in the JAR file which automatically set
@@ -81,13 +82,24 @@ This is the file it creates.
 There are lots of classes that don't implement Referenceable.
 
 #### URIValue ####
-`/EasyJNDI/src/com/digi_dmx/URIValue` encapsulates a java.net.URI object. Useful for saving references to servers and web services.
+`com.digi_dmx.URIValue` encapsulates a `java.net.URI` object. Useful for saving references to servers and web services.
+
+An example of how this could be used is to manage Redis services might look like.
+```
+URIValue uri = InitialContext.doLookup("url/redis");
+
+Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
+//Jedis Cluster will attempt to discover cluster nodes automatically
+jedisClusterNodes.add(new HostAndPort(uri.getHost(), uri.getPort()));
+JedisCluster jc = new JedisCluster(jedisClusterNodes);
+jc.set("foo", "bar");
+```
 
 #### FileLocation #### 
-`/EasyJNDI/src/com/digi_dmx/FileLocation` encapsulates a java.io.File object. Useful for saving references file locations.
+`com.digi_dmx.FileLocation` encapsulates a `java.io.File` object. Useful for saving references file locations.
 
 #### StringValue #### 
-`/EasyJNDI/src/com/digi_dmx/StringValue` encapsulates a java.lang.String object. 
+`com.digi_dmx.StringValue` encapsulates a `java.lang.String` object. 
 
 #### Database Helper ####
 

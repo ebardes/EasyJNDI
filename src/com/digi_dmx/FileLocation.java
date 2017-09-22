@@ -40,7 +40,7 @@ public class FileLocation implements Referenceable
 	private final String path;
 
 	/**
-	 * @param path
+	 * @param path A path on the file system.
 	 */
 	public FileLocation(final String path)
 	{
@@ -48,7 +48,16 @@ public class FileLocation implements Referenceable
 	}
 
 	/**
-	 * @return The path to the file.
+	 * @param path A path on the file system.
+	 * @see java.io.File#getPath()
+	 */
+	public FileLocation(final File path)
+	{
+		this.path = path.getPath();
+	}
+	
+	/**
+	 * @return The path to the file or directory.
 	 */
 	public final String getPath()
 	{
@@ -56,7 +65,8 @@ public class FileLocation implements Referenceable
 	}
 	
 	/**
-	 * @return a {@link java.io.File} object
+	 * @return A File object
+	 * @see java.io.File
 	 */
 	public final File getFile()
 	{

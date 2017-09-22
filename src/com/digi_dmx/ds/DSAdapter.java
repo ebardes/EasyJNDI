@@ -40,6 +40,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 /**
  * The purpose of this class is to provide an adapter for JDBC DataSources that don't implement
  * {@link javax.naming.Referenceable}. A notable example is the Mysql and MariaDB drivers.
+ * Most methods delegate to {@link org.apache.commons.dbcp2.BasicDataSource}
  * 
  * @author eric
  */

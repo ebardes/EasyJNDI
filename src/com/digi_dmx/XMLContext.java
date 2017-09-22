@@ -56,6 +56,10 @@ import javax.xml.bind.Unmarshaller;
 import com.digi_dmx.gen.Attr;
 
 /**
+ * The Primary Class. This class implements Context. More to the point, a subset of Context that works for
+ * most application like JPA providors and general resource management of lookup/bind. It does not support subcontexts.
+ * Unsupported methods will throw {@link java.lang.NoSuchMethodError}. 
+ * 
  * @author Eric E Bardes
  */
 public class XMLContext implements Context
@@ -90,6 +94,15 @@ public class XMLContext implements Context
 	}
 
 	/**
+	 * This is a handy method for initializing the global JNDI environment if for some reason, the defaults don't come through.
+	 */
+	public static void init()
+	{
+		System.setProperty(INITIAL_CONTEXT_FACTORY, XMLContextFactory.class.getName());
+		System.setProperty(PROVIDER_URL, "%{user.home}/jndi");
+	}
+	
+	/**
 	 * Add a value to the environment.
 	 * @param propName The property Name.
 	 * @param propVal The property Value.  This implementation requires that all values be strings.  Values in the form ${user.dir} expand to the corresponding value. 
@@ -109,10 +122,10 @@ public class XMLContext implements Context
 	}
 
 	/**
-	 * This method provides environment expansion.  Values in the form ${user.dir} expand to the corresponding value. 
+	 * This method provides environment expansion.  Values in the form %{user.dir} expand to the corresponding value. 
 	 * 
-	 * @param val
-	 * @return
+	 * @param val the Preprocessed text
+	 * @return Processed text
 	 */
 	private String propertySubstitute(String val)
 	{
@@ -262,7 +275,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError This method isn't implemented
 	 */
 	@Override
 	public Name composeName(Name name, Name prefix) throws NamingException
@@ -272,7 +285,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError This method isn't implemented
 	 */
 	@Override
 	public String composeName(String name, String prefix) throws NamingException
@@ -282,7 +295,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError This method isn't implemented
 	 */
 	@Override
 	public Context createSubcontext(Name name) throws NamingException
@@ -292,7 +305,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError This method isn't implemented
 	 */
 	@Override
 	public Context createSubcontext(String name) throws NamingException
@@ -302,7 +315,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError This method isn't implemented
 	 */
 	@Override
 	public void destroySubcontext(Name name) throws NamingException
@@ -312,7 +325,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public void destroySubcontext(String name) throws NamingException
@@ -331,7 +344,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public String getNameInNamespace() throws NamingException
@@ -341,7 +354,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public NameParser getNameParser(Name name) throws NamingException
@@ -351,7 +364,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public NameParser getNameParser(String name) throws NamingException
@@ -361,7 +374,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public NamingEnumeration<NameClassPair> list(Name name) throws NamingException
@@ -371,7 +384,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public NamingEnumeration<NameClassPair> list(String name) throws NamingException
@@ -381,7 +394,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public NamingEnumeration<Binding> listBindings(Name name) throws NamingException
@@ -391,7 +404,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public NamingEnumeration<Binding> listBindings(String name) throws NamingException
@@ -488,7 +501,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public Object lookupLink(Name name) throws NamingException
@@ -498,7 +511,7 @@ public class XMLContext implements Context
 
 	/**
 	 * This implementation does not implement this method.
-	 * @throws NoSuchMethodError  
+	 * @throws NoSuchMethodError  This method isn't implemented
 	 */
 	@Override
 	public Object lookupLink(String name) throws NamingException

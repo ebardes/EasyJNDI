@@ -30,8 +30,9 @@ SOFTWARE.
 	<version>1.0.2</version>
 	<description>A JNDI Context Provider</description>
 	<name>EasyJNDI</name>
+	<url>https://digi-dmx.com/EasyJNDI</url>
 	<organization>
-		<url>digi-dmx.com</url>
+		<url>https://digi-dmx.com/EasyJNDI</url>
 		<name>Digi DMX</name>
 	</organization>
 	<properties>
@@ -53,9 +54,8 @@ SOFTWARE.
 	</repositories>
 	<licenses>
 		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
 		</license>
 	</licenses>
 	<scm>
@@ -106,6 +106,14 @@ SOFTWARE.
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.0-M1</version>
+				<configuration>
+					<show>public</show>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
