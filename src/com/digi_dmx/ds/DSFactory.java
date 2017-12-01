@@ -43,9 +43,11 @@ public class DSFactory implements ObjectFactory
 		DSAdapter a = new DSAdapter();
 		a.setDriver(ref.get("driver").getContent().toString());
 		a.setUrl(ref.get("url").getContent().toString());
-		a.setUsername(ref.get("username").getContent().toString());
-		a.setPassword(ref.get("password").getContent().toString());
-		a.open();
-		return a;
+		if (ref.get("username") != null && ref.get("username").getContent() != null)
+			a.setUsername(ref.get("username").getContent().toString());
+		if (ref.get("password") != null && ref.get("password").getContent() != null)
+			a.setPassword(ref.get("password").getContent().toString());
+                a.open();
+                return a;
 	}
 }

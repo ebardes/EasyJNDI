@@ -27,7 +27,7 @@ SOFTWARE.
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>EricBardes</groupId>
 	<artifactId>EasyJNDI</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.4</version>
 	<description>A JNDI Context Provider</description>
 	<name>EasyJNDI</name>
 	<url>https://digi-dmx.com/EasyJNDI</url>
