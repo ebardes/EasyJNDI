@@ -25,33 +25,29 @@ SOFTWARE.
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>EricBardes</groupId>
+	<groupId>com.digi-dmx</groupId>
 	<artifactId>EasyJNDI</artifactId>
 	<version>1.0.4</version>
 	<description>A JNDI Context Provider</description>
 	<name>EasyJNDI</name>
-	<url>https://digi-dmx.com/EasyJNDI</url>
+	<url>https://github.com/ebardes/EasyJNDI</url>
 	<organization>
-		<url>https://digi-dmx.com/EasyJNDI</url>
+		<url>https://www.digi-dmx.com/</url>
 		<name>Digi DMX</name>
 	</organization>
+	<developers>
+		<developer>
+			<name>Eric Bardes</name>
+			<email>eric@bardes.org</email>
+			<organization>Digi DMX</organization>
+			<organizationUrl>https://www.digi-dmx.com/</organizationUrl>
+		</developer>
+	</developers>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MMM-dd HH:mm</maven.build.timestamp.format>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<buildtimestamp>${maven.build.timestamp}</buildtimestamp>
 	</properties>
-	<distributionManagement>
-		<repository>
-			<id>digi-dmx</id>
-			<url>https://digi-dmx.com/repo</url>
-		</repository>
-	</distributionManagement>
-	<repositories>
-		<repository>
-			<id>digi-dmx</id>
-			<url>https://digi-dmx.com/repo</url>
-		</repository>
-	</repositories>
 	<licenses>
 		<license>
 			<name>MIT License</name>
@@ -60,6 +56,8 @@ SOFTWARE.
 	</licenses>
 	<scm>
 		<connection>scm:git:git@github.com:ebardes/EasyJNDI.git</connection>
+		<developerConnection>scm:git:git@github.com:ebardes/EasyJNDI.git</developerConnection>
+		<url>https://github.com/ebardes/EasyJNDI/tree/master</url>
 	</scm>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -73,6 +71,20 @@ SOFTWARE.
 			</resource>
 		</resources>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
@@ -93,27 +105,6 @@ SOFTWARE.
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.1</version>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>create</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.0.0-M1</version>
-				<configuration>
-					<show>public</show>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
